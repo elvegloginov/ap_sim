@@ -1,6 +1,4 @@
-package core;
-
-import com.badlogic.gdx.math.Vector3;
+package Entity;
 
 public interface Movable {
 

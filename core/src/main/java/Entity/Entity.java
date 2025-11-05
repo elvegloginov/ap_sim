@@ -1,24 +1,24 @@
-package core;
+package Entity;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.Vector4;
+import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody;
 
-import java.util.Random;
-
-public abstract class Entity extends ModelInstance {
+public abstract class Entity {
     private float x,y,z, theta;
     private Model model;
-    private Vector3 velocity;
     private Vector3 position;
     private Vector4 rotation;
     public static long entityId = 0;
     private long privateId = 0;
+    private final btRigidBody body;
+    private final ModelInstance modelInstance;
 
-    public Entity(Model model){
-        super(model);
+    public Entity(btRigidBody body, ModelInstance modelInstance){
+        this.body = body;
+        this.modelInstance = modelInstance;
         setX(0);
         setY(0);
         setZ(0);
@@ -28,8 +28,9 @@ public abstract class Entity extends ModelInstance {
         setPrivateId(entityId++);
     }
 
-    public Entity(Model model, float x, float y, float z, float theta){
-        super(model, x, y, z);
+    public Entity(btRigidBody body, ModelInstance modelInstance, float x, float y, float z, float theta){
+        this.body = body;
+        this.modelInstance = modelInstance;
         setX(x);
         setY(y);
         setZ(z);
@@ -38,14 +39,16 @@ public abstract class Entity extends ModelInstance {
         setRotation(new Vector4(getPosition(), theta));
     }
 
-    public Entity(Model model, Vector3 vector3, float theta){
-        super(model, vector3);
+    public Entity(btRigidBody body, ModelInstance modelInstance, Vector3 vector3, float theta){
+        this.body = body;
+        this.modelInstance = modelInstance;
         setPosition(vector3);
         setRotation(new Vector4(vector3, theta));
     }
 
-    public Entity(Model model, Vector4 vector4){
-        super(model);
+    public Entity(btRigidBody body, ModelInstance modelInstance, Vector4 vector4){
+        this.body = body;
+        this.modelInstance = modelInstance;
         setRotation(vector4);
     }
 
@@ -141,5 +144,13 @@ public abstract class Entity extends ModelInstance {
 
     public void setPrivateId(long privateId) {
         this.privateId = privateId;
+    }
+
+    public ModelInstance getModelInstance(){
+        return modelInstance;
+    }
+
+    public btRigidBody getBody(){
+        return body;
     }
 }

@@ -15,6 +15,7 @@ dependencies {
   api "com.github.tommyettinger:juniper:$juniperVersion"
   api "com.github.tommyettinger:libgdx-utils:$utilsVersion"
   api "net.onedaybeard.artemis:artemis-odb:$artemisOdbVersion"
+  implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
